@@ -8,15 +8,18 @@
 <meta property="og:title" content="Life Account — Everything your family will need, in one calm place">
 <meta property="og:description" content="An encrypted family vault and guided planner. No account, no servers, no tracking.">
 <meta property="og:image" content="https://danielvetan.github.io/life-account-site/images/icon-512.png">
-<meta name="theme-color" content="#f6f3ec">
+<meta name="theme-color" content="#f7f6f9">
 <link rel="icon" href="images/favicon.png">
 <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
 <style>
 :root {
-  --paper: #f6f3ec; --paper-2: #efeadf; --card: #ffffff; --line: #e4ddcf;
-  --ink: #1d2a3a; --text: #3b4656; --muted: #6f7886;
-  --sage: #5f8a72; --sage-2: #e4ede6; --brass: #a8823f; --brass-2: #f3ead8;
-  --sky-top: #c9d7e6; --sky-mid: #ecdcc9; --sky-low: #f6e3cf;
+  --bg: #f7f6f9; --bg-2: #f1edf5; --card: #ffffff; --line: #e7e1ec;
+  --ink: #2e2f33; --text: #45464d; --muted: #6e6f78;
+  --accent: #8a2bb8; --accent-wash: #f4e9fa; --rose: #c8115f; --rose-wash: #fde8f1;
+  --amber: #ffba32; --magenta: #d50f67; --violet: #ac04c4;
+  --spectrum: linear-gradient(90deg, #f29a1f 0%, #d50f67 52%, #ac04c4 100%);
+  --brand: linear-gradient(135deg, #c8115f, #8a1fa8);
+  --sky-top: #e9def3; --sky-mid: #f8e3ec; --sky-low: #fdeee2;
   --radius: 22px; --max: 1160px;
   --sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
   --text-font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
@@ -24,47 +27,49 @@
 }
 * { box-sizing: border-box; }
 html { scroll-padding-top: 76px; }
-body { margin: 0; background: var(--paper); color: var(--text); font: 17px/1.6 var(--text-font); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+body { margin: 0; background: var(--bg); color: var(--text); font: 17px/1.6 var(--text-font); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
 img { display: block; max-width: 100%; }
 a { color: inherit; }
 h1, h2, h3 { font-family: var(--sans); color: var(--ink); margin: 0; letter-spacing: -0.025em; font-weight: 500; }
 p { margin: 0; }
 .wrap { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
-.eyebrow { font-size: 13px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--sage); }
+.eyebrow { font-size: 13px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); }
+
+.grad { background: var(--spectrum); -webkit-background-clip: text; background-clip: text; color: transparent; }
 
 /* ---------- Nav ---------- */
 nav.top { position: fixed; inset: 0 0 auto; z-index: 50; transition: background .3s, box-shadow .3s, color .3s; }
 nav.top .wrap { display: flex; align-items: center; justify-content: space-between; height: 68px; }
-nav.top.solid { background: rgba(246, 243, 236, .86); backdrop-filter: saturate(160%) blur(16px); -webkit-backdrop-filter: saturate(160%) blur(16px); box-shadow: 0 1px 0 var(--line); }
+nav.top.solid { background: rgba(247, 246, 249, .86); backdrop-filter: saturate(160%) blur(16px); -webkit-backdrop-filter: saturate(160%) blur(16px); box-shadow: 0 1px 0 var(--line); }
 .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink); font: 600 17px var(--sans); letter-spacing: -.01em; }
 .brand img { width: 30px; height: 30px; border-radius: 8px; }
 .links { display: flex; align-items: center; gap: 28px; font-size: 14.5px; }
 .links a { text-decoration: none; color: var(--text); }
 .links a:hover { color: var(--ink); }
-.pill { display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 999px; background: var(--ink); color: #fff !important; font-weight: 550; text-decoration: none; font-size: 14.5px; }
+.pill { display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 999px; background: var(--brand); color: #fff !important; font-weight: 550; text-decoration: none; font-size: 14.5px; }
 @media (max-width: 760px) { .links a:not(.pill) { display: none; } }
 
 /* ---------- Hero: layered landscape + scroll push-in ---------- */
 .hero { position: relative; height: 230vh; }
-.hero-stage { position: sticky; top: 0; height: 100vh; overflow: hidden; background: linear-gradient(180deg, var(--sky-top) 0%, var(--sky-mid) 46%, var(--sky-low) 64%, #e7e2cf 100%); }
+.hero-stage { position: sticky; top: 0; height: 100vh; overflow: hidden; background: linear-gradient(180deg, var(--sky-top) 0%, var(--sky-mid) 46%, var(--sky-low) 64%, #f6e6ef 100%); }
 .layer { position: absolute; left: -8%; right: -8%; bottom: 0; will-change: transform; transform-origin: 50% 100%; }
 .layer svg { width: 100%; height: 100%; display: block; }
-.sun { position: absolute; left: 50%; top: 38%; width: 70vmin; height: 70vmin; margin-left: -35vmin; border-radius: 50%; background: radial-gradient(circle, rgba(255, 240, 214, .95) 0%, rgba(255, 228, 190, .45) 35%, transparent 68%); will-change: transform; }
+.sun { position: absolute; left: 50%; top: 38%; width: 70vmin; height: 70vmin; margin-left: -35vmin; border-radius: 50%; background: radial-gradient(circle, rgba(255, 226, 196, .95) 0%, rgba(255, 186, 120, .38) 35%, transparent 68%); will-change: transform; }
 .mist { position: absolute; left: -10%; right: -10%; height: 16vh; background: linear-gradient(180deg, transparent, rgba(255, 255, 255, .72) 50%, transparent); filter: blur(6px); will-change: transform; }
 .hero-copy { position: absolute; left: 0; right: 0; top: 15vh; text-align: center; z-index: 5; padding: 0 24px; will-change: transform, opacity; }
 .hero-copy h1 { font-size: clamp(38px, 5.6vw, 64px); line-height: 1.06; }
-.hero-copy p { font-size: clamp(17px, 1.6vw, 20px); color: #4c5768; max-width: 560px; margin: 18px auto 28px; }
+.hero-copy p { font-size: clamp(17px, 1.6vw, 20px); color: #55565e; max-width: 560px; margin: 18px auto 28px; }
 .ctas { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
 .btn { display: inline-flex; align-items: center; gap: 9px; padding: 13px 22px; border-radius: 999px; font-weight: 560; font-size: 15.5px; text-decoration: none; transition: transform .15s, background .2s; }
 .btn:active { transform: scale(.98); }
-.btn-dark { background: var(--ink); color: #fff; }
+.btn-dark { background: var(--brand); color: #fff; box-shadow: 0 10px 24px rgba(200, 17, 95, .25); }
 .btn-glass { background: rgba(255, 255, 255, .55); color: var(--ink); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .7); }
 .btn svg { width: 17px; height: 17px; }
 .hero-device { position: absolute; left: 50%; bottom: 0; z-index: 5; width: min(360px, 62vw); margin-left: calc(min(360px, 62vw) / -2); transform-origin: 50% 100%; will-change: transform; }
-.device { border-radius: 46px; padding: 11px; background: linear-gradient(160deg, #3a4a5f, #1b2636); box-shadow: 0 40px 80px rgba(29, 42, 58, .28), 0 0 0 1px rgba(255, 255, 255, .25) inset; }
+.device { border-radius: 46px; padding: 11px; background: linear-gradient(160deg, #4a2a5e, #24132f); box-shadow: 0 40px 80px rgba(61, 26, 82, .28), 0 0 0 1px rgba(255, 255, 255, .25) inset; }
 .device img { border-radius: 36px; width: 100%; }
-.trust { display: flex; justify-content: center; gap: 8px 20px; flex-wrap: wrap; margin-top: 20px; font-size: 13.5px; color: #4c5768; }
-.trust span::before { content: "✓"; color: var(--sage); font-weight: 700; margin-right: 6px; }
+.trust { display: flex; justify-content: center; gap: 8px 20px; flex-wrap: wrap; margin-top: 20px; font-size: 13.5px; color: #55565e; }
+.trust span::before { content: "✓"; color: var(--accent); font-weight: 700; margin-right: 6px; }
 
 /* ---------- Features: pinned phone storytelling ---------- */
 section.block { padding: 120px 0; position: relative; }
@@ -75,16 +80,16 @@ section.block { padding: 120px 0; position: relative; }
 .chapters { position: relative; }
 .chapters::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: var(--line); }
 .chapter { min-height: 72vh; display: flex; flex-direction: column; justify-content: center; padding-left: 32px; position: relative; opacity: .38; transition: opacity .45s; }
-.chapter::before { content: ""; position: absolute; left: 0; top: 50%; height: 0; width: 2px; background: var(--sage); transition: height .45s, top .45s; }
+.chapter::before { content: ""; position: absolute; left: 0; top: 50%; height: 0; width: 2px; background: var(--accent); transition: height .45s, top .45s; }
 .chapter.active { opacity: 1; }
 .chapter.active::before { top: calc(50% - 60px); height: 120px; }
-.chapter .num { font: 600 13px var(--sans); color: var(--brass); letter-spacing: .12em; margin-bottom: 12px; }
+.chapter .num { font: 600 13px var(--sans); color: var(--rose); letter-spacing: .12em; margin-bottom: 12px; }
 .chapter h3 { font-size: clamp(26px, 2.8vw, 34px); line-height: 1.15; margin-bottom: 14px; }
 .chapter p { color: var(--muted); font-size: 18px; max-width: 440px; }
 .chapter .inline-shot { display: none; }
 .pin { position: sticky; top: 12vh; height: 76vh; display: flex; align-items: center; justify-content: center; }
-.pin-bg { position: absolute; inset: 4% 0; border-radius: 36px; background: radial-gradient(120% 90% at 50% 100%, var(--sage-2), var(--paper-2) 70%); overflow: hidden; }
-.pin-bg::after { content: ""; position: absolute; left: -10%; right: -10%; bottom: -1px; height: 38%; background: linear-gradient(180deg, transparent, rgba(95, 138, 114, .16)); clip-path: polygon(0 60%, 18% 40%, 34% 55%, 52% 30%, 70% 48%, 86% 34%, 100% 46%, 100% 100%, 0 100%); }
+.pin-bg { position: absolute; inset: 4% 0; border-radius: 36px; background: radial-gradient(120% 90% at 50% 100%, var(--accent-wash), var(--bg-2) 70%); overflow: hidden; }
+.pin-bg::after { content: ""; position: absolute; left: -10%; right: -10%; bottom: -1px; height: 38%; background: linear-gradient(180deg, transparent, rgba(138, 43, 184, .14)); clip-path: polygon(0 60%, 18% 40%, 34% 55%, 52% 30%, 70% 48%, 86% 34%, 100% 46%, 100% 100%, 0 100%); }
 .pin .device { position: relative; width: min(300px, 80%); }
 .pin .screens { position: relative; border-radius: 36px; overflow: hidden; aspect-ratio: 1320 / 2868; }
 .pin .screens img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transform: scale(1.03); transition: opacity .55s ease, transform .7s ease; }
@@ -94,7 +99,7 @@ section.block { padding: 120px 0; position: relative; }
   .pin { display: none; }
   .chapters::before, .chapter::before { display: none; }
   .chapter { min-height: 0; opacity: 1; padding: 0 0 72px; }
-  .chapter .inline-shot { display: block; width: min(280px, 78%); margin: 28px auto 0; border-radius: 36px; border: 9px solid #24324a; box-shadow: 0 24px 50px rgba(29, 42, 58, .2); }
+  .chapter .inline-shot { display: block; width: min(280px, 78%); margin: 28px auto 0; border-radius: 36px; border: 9px solid #2a1a36; box-shadow: 0 24px 50px rgba(61, 26, 82, .2); }
 }
 
 /* Feature grid */
@@ -102,27 +107,48 @@ section.block { padding: 120px 0; position: relative; }
 @media (max-width: 900px) { .grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
 .card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 26px; transition: transform .3s, box-shadow .3s; }
-.card:hover { transform: translateY(-3px); box-shadow: 0 18px 40px rgba(29, 42, 58, .07); }
-.card .ico { width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; background: var(--sage-2); color: var(--sage); margin-bottom: 18px; }
+.card:hover { transform: translateY(-3px); box-shadow: 0 18px 40px rgba(61, 26, 82, .07); }
+.card .ico { width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; background: var(--accent-wash); color: var(--accent); margin-bottom: 18px; }
 .card .ico svg { width: 21px; height: 21px; }
 .card h3 { font-size: 18px; font-weight: 600; letter-spacing: -.01em; margin-bottom: 8px; }
 .card p { color: var(--muted); font-size: 15.5px; line-height: 1.55; }
-.badge { display: inline-block; font-size: 10.5px; font-weight: 700; letter-spacing: .08em; padding: 3px 8px; border-radius: 999px; background: var(--brass-2); color: var(--brass); vertical-align: 3px; margin-left: 6px; }
+.badge { display: inline-block; font-size: 10.5px; font-weight: 700; letter-spacing: .08em; padding: 3px 8px; border-radius: 999px; background: var(--rose-wash); color: var(--rose); vertical-align: 3px; margin-left: 6px; }
+.badge.soon { background: var(--accent-wash); color: var(--accent); }
 
 /* ---------- Hand-off: parallax cards ---------- */
-.handoff { background: var(--paper-2); overflow: hidden; }
+.handoff { background: var(--bg-2); overflow: hidden; }
 .center { text-align: center; max-width: 760px; margin: 0 auto 56px; }
 .center p { color: var(--muted); font-size: 19px; }
 .keys { position: relative; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
 @media (max-width: 800px) { .keys { grid-template-columns: 1fr; } }
 .key { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 30px 26px; will-change: transform; }
-.key .tag { font: 700 12px var(--sans); letter-spacing: .14em; color: var(--brass); }
+.key .tag { font: 700 12px var(--sans); letter-spacing: .14em; color: var(--rose); }
 .key h3 { font-size: 22px; margin: 10px 0 8px; font-weight: 600; }
 .key p { color: var(--muted); font-size: 16px; }
 .key .glyph { width: 52px; height: 52px; border-radius: 15px; display: grid; place-items: center; margin-bottom: 18px; }
 .key .glyph svg { width: 26px; height: 26px; }
 .rule { display: flex; justify-content: center; gap: 12px 28px; flex-wrap: wrap; margin-top: 40px; color: var(--text); font-size: 16px; }
 .rule b { color: var(--ink); font-weight: 600; }
+
+/* ---------- Together (shared vault) ---------- */
+.together { overflow: hidden; }
+.together .center { margin-bottom: 48px; }
+.people { display: grid; grid-template-columns: 1.1fr 1fr; gap: 56px; align-items: center; }
+@media (max-width: 900px) { .people { grid-template-columns: 1fr; gap: 40px; } }
+.roster { background: var(--card); border: 1px solid var(--line); border-radius: 28px; padding: 10px 22px; box-shadow: 0 30px 60px rgba(61, 26, 82, .08); will-change: transform; }
+.person { display: flex; align-items: center; gap: 14px; padding: 16px 0; border-bottom: 1px solid var(--line); }
+.person:last-child { border-bottom: 0; }
+.avatar { width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center; color: #fff; font: 600 16px var(--sans); flex: none; }
+.person b { color: var(--ink); font-weight: 600; display: block; }
+.person small { color: var(--muted); font-size: 13.5px; }
+.role { margin-left: auto; font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 999px; white-space: nowrap; }
+.role.owner { background: var(--accent-wash); color: var(--accent); }
+.role.now { background: #eef0f3; color: #5d6070; }
+.role.later { background: var(--rose-wash); color: var(--rose); }
+.approve { margin: 6px 0 14px; padding: 14px 16px; border-radius: 18px; background: var(--bg-2); font-size: 14.5px; color: var(--text); }
+.approve .bar { height: 6px; border-radius: 6px; background: #e4dcea; margin-top: 10px; overflow: hidden; }
+.approve .bar i { display: block; height: 100%; width: 50%; background: var(--spectrum); border-radius: 6px; }
+.safety { font: 600 15px ui-monospace, "SF Mono", Menlo, monospace; letter-spacing: .06em; color: var(--ink); }
 
 /* ---------- Survivor split with parallax device ---------- */
 .split { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
@@ -131,9 +157,9 @@ section.block { padding: 120px 0; position: relative; }
 .split .lead { color: var(--muted); font-size: 19px; margin-bottom: 28px; }
 .points { list-style: none; padding: 0; margin: 0; }
 .points li { padding: 16px 0 16px 34px; border-top: 1px solid var(--line); position: relative; color: var(--muted); }
-.points li::before { content: ""; position: absolute; left: 0; top: 20px; width: 20px; height: 20px; border-radius: 50%; background: var(--sage-2) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M6 10.5l2.6 2.6L14 7.6' fill='none' stroke='%235f8a72' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/20px no-repeat; }
+.points li::before { content: ""; position: absolute; left: 0; top: 20px; width: 20px; height: 20px; border-radius: 50%; background: var(--accent-wash) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M6 10.5l2.6 2.6L14 7.6' fill='none' stroke='%238a2bb8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/20px no-repeat; }
 .points strong { color: var(--ink); font-weight: 600; }
-.stage { position: relative; height: 640px; border-radius: 36px; overflow: hidden; background: linear-gradient(180deg, #dfe6ee, #f4e6d4 70%); }
+.stage { position: relative; height: 640px; border-radius: 36px; overflow: hidden; background: linear-gradient(180deg, #ece2f4, #fbe7ee 70%); }
 @media (max-width: 600px) { .stage { height: 560px; } }
 .stage .hill { position: absolute; left: -10%; width: 120%; bottom: 0; display: block; will-change: transform; }
 .stage .device { position: absolute; left: 50%; bottom: -40px; width: 270px; margin-left: -135px; will-change: transform; }
@@ -142,12 +168,12 @@ section.block { padding: 120px 0; position: relative; }
 .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; counter-reset: s; }
 @media (max-width: 800px) { .steps { grid-template-columns: 1fr; } }
 .step { counter-increment: s; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 28px; }
-.step::before { content: counter(s); display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; background: var(--brass-2); color: var(--brass); font: 600 16px var(--sans); margin-bottom: 18px; }
+.step::before { content: counter(s); display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; background: var(--rose-wash); color: var(--rose); font: 600 16px var(--sans); margin-bottom: 18px; }
 .step h3 { font-size: 20px; font-weight: 600; }
 .step p { color: var(--muted); font-size: 16px; margin-top: 8px; }
 .privacy { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
 @media (max-width: 900px) { .privacy { grid-template-columns: 1fr; gap: 28px; } }
-.textlink { color: var(--sage); font-weight: 600; text-decoration: none; }
+.textlink { color: var(--accent); font-weight: 600; text-decoration: none; }
 .textlink:hover { text-decoration: underline; }
 .specs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; background: var(--card); margin-top: 72px; }
 @media (max-width: 800px) { .specs { grid-template-columns: 1fr 1fr; } }
@@ -156,15 +182,15 @@ section.block { padding: 120px 0; position: relative; }
 .specs dd { margin: 0; color: var(--ink); font-weight: 550; }
 
 /* ---------- Final CTA: landscape again ---------- */
-.final { position: relative; overflow: hidden; text-align: center; padding: 140px 0 220px; background: linear-gradient(180deg, var(--paper) 0%, var(--sky-low) 55%, #ead9c2 100%); }
+.final { position: relative; overflow: hidden; text-align: center; padding: 140px 0 220px; background: linear-gradient(180deg, var(--bg) 0%, var(--sky-mid) 55%, #f3d9e6 100%); }
 .final .hill { position: absolute; left: -10%; width: 120%; bottom: 0; display: block; will-change: transform; }
 .final .inner { position: relative; z-index: 2; }
-.final img.icon { width: 84px; height: 84px; border-radius: 20px; margin: 0 auto 26px; box-shadow: 0 14px 34px rgba(29, 42, 58, .18); }
+.final img.icon { width: 84px; height: 84px; border-radius: 20px; margin: 0 auto 26px; box-shadow: 0 14px 34px rgba(61, 26, 82, .18); }
 .final h2 { font-size: clamp(32px, 4.4vw, 50px); margin-bottom: 14px; }
-.final p { color: #5b6574; font-size: 19px; max-width: 560px; margin: 0 auto 30px; }
-footer { background: #ead9c2; padding: 0 0 40px; color: #6b6253; font-size: 14px; }
-footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; border-top: 1px solid rgba(29, 42, 58, .1); padding-top: 26px; }
-footer a { color: #6b6253; text-decoration: none; margin-left: 18px; }
+.final p { color: #5e5f68; font-size: 19px; max-width: 560px; margin: 0 auto 30px; }
+footer { background: #ecd3e3; padding: 0 0 40px; color: #6a4f63; font-size: 14px; }
+footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; border-top: 1px solid rgba(61, 26, 82, .1); padding-top: 26px; }
+footer a { color: #6a4f63; text-decoration: none; margin-left: 18px; }
 footer a:hover { color: var(--ink); }
 .disclaimer { font-size: 13px; margin-top: 10px; max-width: 640px; }
 
@@ -176,7 +202,7 @@ footer a:hover { color: var(--ink); }
   .hero { height: auto; }
   .hero-stage { position: relative; height: 100vh; min-height: 720px; }
   .reveal { opacity: 1; transform: none; transition: none; }
-  .layer, .sun, .mist, .hero-copy, .hero-device, .key, .stage .device, .stage .hill, .final .hill { transform: none !important; }
+  .layer, .sun, .mist, .hero-copy, .hero-device, .key, .roster, .stage .device, .stage .hill, .final .hill { transform: none !important; }
   .pin .screens img { transition: none; }
 }
 </style>
@@ -189,6 +215,7 @@ footer a:hover { color: var(--ink); }
     <div class="links">
       <a href="#features">Features</a>
       <a href="#handoff">The hand-off</a>
+      <a href="#together">Together</a>
       <a href="#family">For your family</a>
       <a href="#privacy">Privacy</a>
       <a class="pill" href="#final">Coming soon</a>
@@ -202,20 +229,20 @@ footer a:hover { color: var(--ink); }
     <div class="sun" data-depth="0.15"></div>
 
     <div class="layer" data-depth="0.08" style="height:58vh">
-      <svg viewBox="0 0 1600 600" preserveAspectRatio="none" aria-hidden="true"><path fill="#b9c7d6" d="M0 330 L120 270 L230 300 L360 210 L470 260 L590 180 L720 250 L840 200 L960 260 L1090 170 L1220 240 L1340 200 L1470 260 L1600 220 L1600 600 L0 600Z"/></svg>
+      <svg viewBox="0 0 1600 600" preserveAspectRatio="none" aria-hidden="true"><path fill="#dccbea" d="M0 330 L120 270 L230 300 L360 210 L470 260 L590 180 L720 250 L840 200 L960 260 L1090 170 L1220 240 L1340 200 L1470 260 L1600 220 L1600 600 L0 600Z"/></svg>
     </div>
     <div class="mist" data-depth="0.12" style="bottom:36vh"></div>
     <div class="layer" data-depth="0.2" style="height:48vh">
-      <svg viewBox="0 0 1600 600" preserveAspectRatio="none" aria-hidden="true"><path fill="#a9bcb0" d="M0 300 C160 220 280 260 420 230 C560 200 640 290 800 250 C960 210 1060 170 1210 220 C1350 265 1460 230 1600 250 L1600 600 L0 600Z"/></svg>
+      <svg viewBox="0 0 1600 600" preserveAspectRatio="none" aria-hidden="true"><path fill="#d2aed8" d="M0 300 C160 220 280 260 420 230 C560 200 640 290 800 250 C960 210 1060 170 1210 220 C1350 265 1460 230 1600 250 L1600 600 L0 600Z"/></svg>
     </div>
     <div class="mist" data-depth="0.24" style="bottom:24vh; opacity:.8"></div>
     <div class="layer" data-depth="0.38" style="height:38vh">
-      <svg viewBox="0 0 1600 600" preserveAspectRatio="none" aria-hidden="true"><path fill="#8faa94" d="M0 330 C200 250 330 300 520 270 C700 240 780 320 980 300 C1160 282 1280 230 1440 260 C1520 275 1570 290 1600 300 L1600 600 L0 600Z"/></svg>
+      <svg viewBox="0 0 1600 600" preserveAspectRatio="none" aria-hidden="true"><path fill="#bb84c6" d="M0 330 C200 250 330 300 520 270 C700 240 780 320 980 300 C1160 282 1280 230 1440 260 C1520 275 1570 290 1600 300 L1600 600 L0 600Z"/></svg>
     </div>
 
     <div class="hero-copy" id="heroCopy">
       <div class="eyebrow" style="margin-bottom:14px">For iPhone and iPad · Coming soon</div>
-      <h1>Your affairs,<br>in one calm place.</h1>
+      <h1>Your affairs,<br>in one <span class="grad">calm place.</span></h1>
       <p>Get your family's documents, accounts, benefits and wishes in order, ten minutes at a time. If something ever happens to you, Life Account hands it all to them securely.</p>
       <div class="ctas">
         <a class="btn btn-dark" href="#final"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.37 12.6c-.02-2.2 1.8-3.26 1.88-3.31-1.03-1.5-2.62-1.7-3.18-1.73-1.35-.14-2.64.8-3.33.8-.69 0-1.74-.78-2.87-.76-1.47.02-2.83.86-3.59 2.18-1.53 2.66-.39 6.6 1.1 8.75.73 1.05 1.6 2.24 2.73 2.2 1.1-.05 1.51-.71 2.84-.71 1.32 0 1.7.71 2.86.69 1.18-.02 1.93-1.07 2.65-2.13.83-1.22 1.18-2.4 1.2-2.46-.03-.01-2.3-.88-2.3-3.52zM14.2 6.13c.6-.73 1.01-1.75.9-2.76-.87.04-1.92.58-2.54 1.31-.56.65-1.05 1.68-.92 2.67.97.08 1.96-.49 2.56-1.22z"/></svg>Coming soon to the App Store</a>
@@ -229,7 +256,7 @@ footer a:hover { color: var(--ink); }
     </div>
 
     <div class="layer" data-depth="0.62" style="height:22vh; z-index:4">
-      <svg viewBox="0 0 1600 300" preserveAspectRatio="none" aria-hidden="true"><path fill="#6f9479" d="M0 120 C220 60 420 130 640 100 C820 76 960 40 1140 80 C1320 120 1460 70 1600 90 L1600 300 L0 300Z"/><path fill="#5f8a72" d="M0 210 C260 160 520 220 800 190 C1080 160 1300 200 1600 170 L1600 300 L0 300Z"/></svg>
+      <svg viewBox="0 0 1600 300" preserveAspectRatio="none" aria-hidden="true"><path fill="#9c4fb2" d="M0 120 C220 60 420 130 640 100 C820 76 960 40 1140 80 C1320 120 1460 70 1600 90 L1600 300 L0 300Z"/><path fill="#7c2a9a" d="M0 210 C260 160 520 220 800 190 C1080 160 1300 200 1600 170 L1600 300 L0 300Z"/></svg>
     </div>
 
   </div>
@@ -240,7 +267,7 @@ footer a:hover { color: var(--ink); }
   <div class="wrap">
     <div class="head reveal">
       <div class="eyebrow">Features</div>
-      <h2>Everything your family will need.<br>All in one place.</h2>
+      <h2>Everything your family will need.<br><span class="grad">All in one place.</span></h2>
       <p>You don't know what you don't know. Life Account does, and walks you through it in the order that matters.</p>
     </div>
 
@@ -303,6 +330,12 @@ footer a:hover { color: var(--ink); }
         <h3>Typos caught for you <span class="badge">NEW</span></h3><p>Each Family Key Card code carries a checksum, so a mistyped character is caught instead of silently failing.</p></div>
       <div class="card reveal"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
         <h3>A tamper-evident log</h3><p>Every unlock, change and recovery is recorded in a chain that breaks if anyone edits or deletes an entry.</p></div>
+      <div class="card reveal"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <h3>Family sharing <span class="badge soon">SOON</span></h3><p>Owners edit together from their own iPhones. Everyone else can view now or only when needed, and every invite needs every owner's approval.</p></div>
+      <div class="card reveal"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10 10 0 0 1 12 20c-7 0-10-8-10-8a18 18 0 0 1 5.06-5.94M9.9 4.24A9 9 0 0 1 12 4c7 0 10 8 10 8a18 18 0 0 1-2.16 3.19M1 1l22 22"/></svg></div>
+        <h3>Private until needed <span class="badge soon">SOON</span></h3><p>Keep any item, and every letter, readable only by you until the Family Key Card step, even inside a shared vault.</p></div>
+      <div class="card reveal"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM20 14v.01M14 20h.01M17 20h4v-3"/></svg></div>
+        <h3>Verified in person <span class="badge soon">SOON</span></h3><p>A 20-digit safety number and QR code prove a new phone really belongs to your family member, not an impostor.</p></div>
     </div>
   </div>
 </section>
@@ -312,24 +345,54 @@ footer a:hover { color: var(--ink); }
   <div class="wrap">
     <div class="center reveal">
       <div class="eyebrow">The hand-off</div>
-      <h2>Two halves of one key.</h2>
+      <h2>A key your family <span class="grad">can actually use.</span></h2>
       <p>Apple's Legacy Contact passes your iCloud files to your family, but not your saved passwords or Keychain. So on its own, it can't open an encrypted vault. Life Account closes that gap.</p>
     </div>
     <div class="keys">
       <div class="key" data-float="-0.06">
-        <div class="glyph" style="background:#e5ecf4;color:#3b5b85"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19a4.5 4.5 0 1 0-1.4-8.8A6 6 0 0 0 4.5 12 3.5 3.5 0 0 0 6 19z"/></svg></div>
+        <div class="glyph" style="background:#fff3da;color:#b86e00"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19a4.5 4.5 0 1 0-1.4-8.8A6 6 0 0 0 4.5 12 3.5 3.5 0 0 0 6 19z"/></svg></div>
         <div class="tag">KEY A</div><h3>Legacy Package</h3><p>Rides along in iCloud Drive, released by Apple to your Legacy Contact.</p>
       </div>
       <div class="key" data-float="0.04">
-        <div class="glyph" style="background:var(--sage-2);color:var(--sage)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8z"/></svg></div>
+        <div class="glyph" style="background:var(--accent-wash);color:var(--accent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8z"/></svg></div>
         <div class="tag">KEY B</div><h3>Family Key Card</h3><p>A printed card for your spouse or primary beneficiary.</p>
       </div>
       <div class="key" data-float="-0.1">
-        <div class="glyph" style="background:var(--brass-2);color:var(--brass)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V10M19 21V10M9 21v-6h6v6M2 10l10-7 10 7"/></svg></div>
+        <div class="glyph" style="background:var(--rose-wash);color:var(--rose)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V10M19 21V10M9 21v-6h6v6M2 10l10-7 10 7"/></svg></div>
         <div class="tag">KEY C</div><h3>Your attorney</h3><p>For when Apple isn't involved at all.</p>
       </div>
     </div>
     <div class="rule reveal"><span><b>Any two</b> open the vault.</span><span><b>One alone</b> reveals nothing.</span><span><b>Lose a card?</b> Re-split and the old ones stop working.</span></div>
+  </div>
+</section>
+
+<!-- TOGETHER -->
+<section class="block together" id="together">
+  <div class="wrap">
+    <div class="center reveal">
+      <div class="eyebrow">Together <span class="badge soon">COMING SOON</span></div>
+      <h2>Plan it together, <span class="grad">each on your own iPhone.</span></h2>
+      <p>Your spouse works on the same vault from their own phone and Apple ID. Adult children and your attorney can view it now, or only when it's needed. Everything stays end-to-end encrypted.</p>
+    </div>
+    <div class="people">
+      <div class="roster" data-float="-0.05" aria-label="Example household">
+        <div class="person"><div class="avatar" style="background:var(--brand)">S</div><div><b>Sarah</b><small>Created this vault · Key Card</small></div><span class="role owner">Owner</span></div>
+        <div class="person"><div class="avatar" style="background:#8a2bb8">M</div><div><b>Michael</b><small>Spouse · Key Card</small></div><span class="role owner">Owner</span></div>
+        <div class="person"><div class="avatar" style="background:#f29a1f">E</div><div><b>Emma</b><small>Daughter, 24</small></div><span class="role now">Views now</span></div>
+        <div class="person"><div class="avatar" style="background:#6e6f78">R</div><div><b>Rivera &amp; Cole</b><small>Estate attorney · Key Card</small></div><span class="role later">When needed</span></div>
+        <div class="approve"><b style="color:var(--ink)">Add Jack (views now)?</b> · 1 of 2 owners approved
+          <div class="bar"><i></i></div>
+          <div style="margin-top:10px">Safety number <span class="safety">4821 0937 5512 8064 3390</span></div>
+        </div>
+      </div>
+      <ul class="points reveal">
+        <li><strong>Every owner approves.</strong> Nobody joins until every living owner says yes, after matching a safety number or scanning a code in person.</li>
+        <li><strong>View now, or only when needed.</strong> Give an adult child read access today, or let your attorney in only with a Family Key Card.</li>
+        <li><strong>Private to me until needed.</strong> Mark any item private, and your letters always are. Others see it exists, but not what's inside.</li>
+        <li><strong>A safe pause.</strong> If someone marks an owner as passed away, nothing changes for 7 days, and it's cancelled the moment that owner's phone is used.</li>
+        <li><strong>Remove anyone, safely.</strong> The vault gets a new key, so a removed person can't read anything added afterward.</li>
+      </ul>
+    </div>
   </div>
 </section>
 
@@ -348,16 +411,16 @@ footer a:hover { color: var(--ink); }
       </ul>
     </div>
     <div class="stage" id="stage" aria-hidden="true">
-      <svg class="hill" data-depth="0.05" viewBox="0 0 800 400" preserveAspectRatio="none" style="height:62%"><path fill="#c5d1dc" d="M0 170 L110 120 L200 150 L320 80 L430 140 L540 90 L660 150 L800 110 L800 400 L0 400Z"/></svg>
-      <svg class="hill" data-depth="0.12" viewBox="0 0 800 400" preserveAspectRatio="none" style="height:46%"><path fill="#aebfb3" d="M0 200 C140 140 260 190 400 160 C540 130 660 180 800 150 L800 400 L0 400Z"/></svg>
+      <svg class="hill" data-depth="0.05" viewBox="0 0 800 400" preserveAspectRatio="none" style="height:62%"><path fill="#ddd0ea" d="M0 170 L110 120 L200 150 L320 80 L430 140 L540 90 L660 150 L800 110 L800 400 L0 400Z"/></svg>
+      <svg class="hill" data-depth="0.12" viewBox="0 0 800 400" preserveAspectRatio="none" style="height:46%"><path fill="#d0a9d6" d="M0 200 C140 140 260 190 400 160 C540 130 660 180 800 150 L800 400 L0 400Z"/></svg>
       <div class="device" data-depth="-0.12"><img src="images/06-recovery.jpg" alt=""></div>
-      <svg class="hill" data-depth="0.22" viewBox="0 0 800 400" preserveAspectRatio="none" style="height:20%; z-index:3"><path fill="#7d9f86" d="M0 170 C200 110 360 180 520 140 C650 108 730 150 800 130 L800 400 L0 400Z"/></svg>
+      <svg class="hill" data-depth="0.22" viewBox="0 0 800 400" preserveAspectRatio="none" style="height:20%; z-index:3"><path fill="#a35bb8" d="M0 170 C200 110 360 180 520 140 C650 108 730 150 800 130 L800 400 L0 400Z"/></svg>
     </div>
   </div>
 </section>
 
 <!-- HOW + PRIVACY -->
-<section class="block" style="background:var(--paper-2)" id="privacy">
+<section class="block" style="background:var(--bg-2)" id="privacy">
   <div class="wrap">
     <div class="center reveal">
       <div class="eyebrow">How it works</div>
@@ -397,15 +460,15 @@ footer a:hover { color: var(--ink); }
 <section class="final" id="final">
   <div class="inner wrap reveal">
     <img class="icon" src="images/icon-512.png" alt="">
-    <h2>Give your family the gift of knowing.</h2>
+    <h2>Give your family <span class="grad">the gift of knowing.</span></h2>
     <p>Built so the people you love never have to guess. Coming soon to the App Store for iPhone and iPad.</p>
     <div class="ctas">
       <span class="btn btn-dark"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.37 12.6c-.02-2.2 1.8-3.26 1.88-3.31-1.03-1.5-2.62-1.7-3.18-1.73-1.35-.14-2.64.8-3.33.8-.69 0-1.74-.78-2.87-.76-1.47.02-2.83.86-3.59 2.18-1.53 2.66-.39 6.6 1.1 8.75.73 1.05 1.6 2.24 2.73 2.2 1.1-.05 1.51-.71 2.84-.71 1.32 0 1.7.71 2.86.69 1.18-.02 1.93-1.07 2.65-2.13.83-1.22 1.18-2.4 1.2-2.46-.03-.01-2.3-.88-2.3-3.52zM14.2 6.13c.6-.73 1.01-1.75.9-2.76-.87.04-1.92.58-2.54 1.31-.56.65-1.05 1.68-.92 2.67.97.08 1.96-.49 2.56-1.22z"/></svg>Coming soon to the App Store</span>
       <a class="btn btn-glass" href="index.html">Get support</a>
     </div>
   </div>
-  <svg class="hill" data-depth="0.06" viewBox="0 0 1600 300" preserveAspectRatio="none" style="height:150px"><path fill="#d8c8ae" d="M0 140 C260 80 520 150 800 110 C1080 70 1320 130 1600 100 L1600 300 L0 300Z"/></svg>
-  <svg class="hill" data-depth="0.14" viewBox="0 0 1600 300" preserveAspectRatio="none" style="height:90px"><path fill="#cdbb9e" d="M0 160 C300 110 600 170 900 130 C1180 95 1400 150 1600 120 L1600 300 L0 300Z"/></svg>
+  <svg class="hill" data-depth="0.06" viewBox="0 0 1600 300" preserveAspectRatio="none" style="height:150px"><path fill="#e6bcd3" d="M0 140 C260 80 520 150 800 110 C1080 70 1320 130 1600 100 L1600 300 L0 300Z"/></svg>
+  <svg class="hill" data-depth="0.14" viewBox="0 0 1600 300" preserveAspectRatio="none" style="height:90px"><path fill="#d99cbe" d="M0 160 C300 110 600 170 900 130 C1180 95 1400 150 1600 120 L1600 300 L0 300Z"/></svg>
 </section>
 
 <footer>
@@ -446,7 +509,7 @@ footer a:hover { color: var(--ink); }
   const hero = $('.hero'), stage = $('#heroStage');
   const layers = $$('[data-depth]', stage);
   const copy = $('#heroCopy'), device = $('#heroDevice');
-  const keys = $$('.key[data-float]');
+  const keys = $$('.key[data-float], .roster[data-float]');
   const famStage = $('#stage'), famParts = $$('[data-depth]', famStage);
   const final = $('#final'), finalHills = $$('.hill', final);
 

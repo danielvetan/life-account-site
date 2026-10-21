@@ -11,7 +11,7 @@
 body { margin: 0; background: var(--paper); color: var(--ink); font: 17px/1.6 var(--sans); }
 main { max-width: 720px; margin: 0 auto; padding: 40px 20px 64px; }
 .brand { display: inline-flex; align-items: center; gap: 10px; font: 600 18px var(--serif); color: var(--ink); text-decoration: none; }
-.mark { display: inline-grid; place-items: center; width: 32px; height: 32px; border-radius: 9px; background: #1d2a3a; color: #fff; font-size: 16px; }
+.mark { display: inline-grid; place-items: center; width: 32px; height: 32px; border-radius: 9px; background: linear-gradient(180deg, #e0464f, #a8202c); color: #fff; font-size: 16px; }
 h1 { font: 600 clamp(28px, 6vw, 40px)/1.15 var(--serif); margin: 28px 0 12px; }
 h2 { font: 600 24px var(--serif); margin: 40px 0 8px; }
 h3 { font-size: 17px; margin: 28px 0 4px; }

@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Life Account — Everything your family will need, in one calm place</title>
+<meta name="description" content="An encrypted family vault and guided planner for iPhone and iPad. Get your affairs in order ten minutes at a time, and hand them to your family securely if they ever need them.">
+<meta property="og:title" content="Life Account — Everything your family will need, in one calm place">
+<meta property="og:description" content="An encrypted family vault and guided planner. No account, no servers, no tracking.">
+<meta property="og:image" content="https://danielvetan.github.io/life-account-site/images/icon-512.png">
+<meta name="theme-color" content="#0b1422">
+<link rel="icon" href="images/favicon.png">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<style>
+:root {
+  --bg: #0b1422; --bg-2: #101c2e; --card: #132235; --card-2: #182a40; --line: #22344b;
+  --text: #dfe5ee; --muted: #93a0b2; --white: #f5f7fb;
+  --brass: #d3ae6c; --brass-2: #b08a4a; --brass-wash: #2a2416;
+  --sage: #7fb293; --sage-wash: #1a2e25;
+  --radius: 20px; --radius-sm: 12px; --max: 1120px;
+  --display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
+  --body: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+  --serif: "New York", "Iowan Old Style", Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+body { margin: 0; background: var(--bg); color: var(--text); font: 17px/1.6 var(--body); -webkit-font-smoothing: antialiased; }
+img { display: block; max-width: 100%; }
+a { color: inherit; }
+.wrap { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+h1, h2, h3 { font-family: var(--display); color: var(--white); margin: 0; letter-spacing: -0.02em; }
+h2 { font-size: clamp(30px, 4.2vw, 42px); line-height: 1.12; font-weight: 720; }
+h3 { font-size: 18px; font-weight: 650; letter-spacing: -0.01em; }
+p { margin: 0; }
+.eyebrow { font-size: 12.8px; font-weight: 650; letter-spacing: .14em; text-transform: uppercase; color: var(--brass); }
+.accent { background: linear-gradient(90deg, #e9cf98, var(--brass-2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.lede { font-size: 19px; color: var(--muted); max-width: 560px; }
+.badge { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .06em; padding: 3px 8px; border-radius: 999px; background: var(--brass-wash); color: var(--brass); vertical-align: 2px; margin-left: 6px; }
+
+/* Nav */
+nav.top { position: sticky; top: 0; z-index: 20; background: rgba(11, 20, 34, .82); backdrop-filter: saturate(160%) blur(14px); -webkit-backdrop-filter: saturate(160%) blur(14px); border-bottom: 1px solid rgba(255,255,255,.06); }
+nav.top .wrap { display: flex; align-items: center; justify-content: space-between; height: 60px; }
+.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--white); font: 650 17px var(--display); }
+.brand img { width: 30px; height: 30px; border-radius: 8px; }
+.links { display: flex; gap: 26px; font-size: 14.5px; }
+.links a { text-decoration: none; color: var(--muted); }
+.links a:hover { color: var(--white); }
+@media (max-width: 760px) { .links { display: none; } }
+
+/* Hero */
+.hero { position: relative; overflow: hidden; background: radial-gradient(900px 520px at 78% 30%, rgba(211,174,108,.12), transparent 60%), radial-gradient(800px 600px at 10% 0%, #16294a 0%, transparent 60%), var(--bg); }
+.hero .wrap { display: grid; grid-template-columns: 1.05fr 1fr; gap: 24px; align-items: center; padding-top: 64px; padding-bottom: 72px; }
+.appcard { display: flex; align-items: center; gap: 14px; margin-bottom: 28px; }
+.appcard img { width: 64px; height: 64px; border-radius: 15px; box-shadow: 0 8px 24px rgba(0,0,0,.4), 0 0 0 1px rgba(255,255,255,.08); }
+.appcard strong { display: block; color: var(--white); font: 650 18px var(--display); }
+.appcard span { color: var(--muted); font-size: 14px; }
+.hero h1 { font-size: clamp(42px, 6.4vw, 66px); line-height: 1.04; font-weight: 750; margin: 14px 0 22px; }
+.hero .lede { margin-bottom: 30px; }
+.ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn { display: inline-flex; align-items: center; gap: 10px; padding: 14px 24px; border-radius: 999px; font-weight: 620; font-size: 16px; text-decoration: none; transition: transform .15s, background .2s; }
+.btn:active { transform: scale(.98); }
+.btn-primary { background: #fff; color: #0b1324; }
+.btn-ghost { border: 1px solid rgba(255,255,255,.22); color: var(--white); }
+.btn-ghost:hover { background: rgba(255,255,255,.06); }
+.btn svg { width: 18px; height: 18px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px 20px; margin-top: 22px; font-size: 14px; color: var(--muted); }
+.chips span::before { content: "✓"; color: var(--sage); margin-right: 7px; font-weight: 700; }
+
+/* Phones */
+.phones { position: relative; height: 560px; }
+.phone { position: absolute; width: 250px; border-radius: 40px; padding: 9px; background: linear-gradient(160deg, #2a3a52, #121c2b); box-shadow: 0 30px 60px rgba(0,0,0,.5), inset 0 0 0 1px rgba(255,255,255,.08); }
+.phone img { border-radius: 32px; width: 100%; }
+.phone.p1 { left: 2%; top: 70px; transform: rotate(-6deg); opacity: .92; }
+.phone.p2 { left: 28%; top: 0; z-index: 2; width: 268px; }
+.phone.p3 { right: 0; top: 80px; transform: rotate(6deg); opacity: .92; }
+@media (max-width: 900px) {
+  .hero .wrap { grid-template-columns: 1fr; padding-top: 40px; }
+  .phones { height: 470px; margin-top: 8px; }
+  .phone { width: 200px; } .phone.p2 { width: 220px; left: calc(50% - 110px); }
+  .phone.p1 { left: calc(50% - 250px); } .phone.p3 { right: calc(50% - 250px); }
+}
+@media (max-width: 520px) { .phone.p1, .phone.p3 { display: none; } .phones { height: 480px; } }
+
+/* Sections */
+section.block { padding: 96px 0; }
+section.alt { background: var(--bg-2); }
+.head { max-width: 720px; margin-bottom: 44px; }
+.head h2 { margin: 12px 0 14px; }
+.head p { color: var(--muted); font-size: 18px; }
+
+.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+@media (max-width: 900px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; }
+.card .ico { width: 40px; height: 40px; border-radius: 11px; display: grid; place-items: center; background: var(--sage-wash); color: var(--sage); margin-bottom: 16px; }
+.card .ico svg { width: 21px; height: 21px; }
+.card h3 { margin-bottom: 8px; }
+.card p { color: var(--muted); font-size: 15.5px; line-height: 1.55; }
+
+/* Split feature */
+.split { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+.split.rev .visual { order: -1; }
+@media (max-width: 900px) { .split { grid-template-columns: 1fr; gap: 40px; } .split.rev .visual { order: 0; } }
+.split h2 { margin: 12px 0 16px; }
+.split > div > p.lead { color: var(--muted); font-size: 18px; margin-bottom: 26px; }
+.points { list-style: none; padding: 0; margin: 0 0 24px; }
+.points li { padding: 14px 0 14px 34px; border-top: 1px solid var(--line); position: relative; color: var(--muted); }
+.points li::before { content: ""; position: absolute; left: 0; top: 18px; width: 20px; height: 20px; border-radius: 50%; background: var(--sage-wash) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M6 10.5l2.6 2.6L14 7.6' fill='none' stroke='%237fb293' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/20px no-repeat; }
+.points strong { color: var(--white); font-weight: 600; }
+.note { border-left: 3px solid var(--brass); background: var(--brass-wash); padding: 14px 18px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0; font-size: 15.5px; color: #e5d6b6; }
+.visual { display: flex; justify-content: center; }
+.visual .phone { position: relative; width: 300px; transform: none; opacity: 1; }
+
+/* Keys diagram */
+.keys { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 0 0 24px; }
+@media (max-width: 520px) { .keys { grid-template-columns: 1fr; } }
+.key { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 14px; }
+.key b { display: block; color: var(--white); font: 650 15px var(--display); margin-bottom: 4px; }
+.key span { color: var(--muted); font-size: 13.5px; line-height: 1.45; display: block; }
+.key .tag { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .08em; color: var(--brass); margin-bottom: 6px; }
+
+/* Steps */
+.steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; counter-reset: s; }
+@media (max-width: 800px) { .steps { grid-template-columns: 1fr; } }
+.step { counter-increment: s; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 26px; }
+.step::before { content: counter(s); display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; background: var(--brass-wash); color: var(--brass); font: 700 17px var(--display); margin-bottom: 16px; }
+.step p { color: var(--muted); font-size: 15.5px; margin-top: 8px; }
+
+/* Gallery */
+.gallery { display: flex; gap: 22px; overflow-x: auto; padding: 4px 24px 24px; scroll-snap-type: x mandatory; max-width: var(--max); margin: 0 auto; }
+.gallery figure { margin: 0; flex: 0 0 230px; scroll-snap-align: start; }
+.gallery .phone { position: relative; width: 100%; transform: none; opacity: 1; border-radius: 36px; padding: 8px; }
+.gallery .phone img { border-radius: 29px; }
+.gallery figcaption { text-align: center; margin-top: 14px; font-size: 14.5px; color: var(--muted); }
+.ipad { margin-top: 56px; display: grid; grid-template-columns: 1.2fr 1fr; gap: 48px; align-items: center; }
+@media (max-width: 900px) { .ipad { grid-template-columns: 1fr; } }
+.tablet { border-radius: 30px; padding: 12px; background: linear-gradient(160deg, #2a3a52, #121c2b); box-shadow: 0 30px 60px rgba(0,0,0,.45), inset 0 0 0 1px rgba(255,255,255,.08); }
+.tablet img { border-radius: 20px; }
+
+/* Specs */
+.specs { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; margin-top: 64px; }
+@media (max-width: 800px) { .specs { grid-template-columns: 1fr 1fr; } }
+.specs div { padding: 20px 22px; background: var(--card); border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.specs dt { font-size: 12px; font-weight: 650; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+.specs dd { margin: 0; color: var(--white); font-weight: 560; }
+
+/* Privacy */
+.privacy { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
+@media (max-width: 900px) { .privacy { grid-template-columns: 1fr; gap: 28px; } }
+.privacy .points li { color: var(--muted); }
+.textlink { color: var(--brass); text-decoration: none; font-weight: 600; }
+.textlink:hover { text-decoration: underline; }
+
+/* Final CTA */
+.final { text-align: center; padding: 104px 0; background: radial-gradient(700px 360px at 50% 0%, rgba(211,174,108,.13), transparent 70%), var(--bg); }
+.final img { width: 84px; height: 84px; border-radius: 20px; margin: 0 auto 26px; box-shadow: 0 12px 30px rgba(0,0,0,.45); }
+.final h2 { margin-bottom: 14px; }
+.final p { color: var(--muted); font-size: 18px; max-width: 560px; margin: 0 auto 30px; }
+.final .ctas { justify-content: center; }
+footer { border-top: 1px solid var(--line); padding: 28px 0 40px; color: var(--muted); font-size: 14px; }
+footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+footer a { color: var(--muted); text-decoration: none; margin-left: 18px; }
+footer a:hover { color: var(--white); }
+.disclaimer { font-size: 13px; color: #6f7c8f; margin-top: 10px; max-width: 640px; }
+</style>
+</head>
+<body>
+
+<nav class="top" aria-label="Main">
+  <div class="wrap">
+    <a class="brand" href="#top"><img src="images/apple-touch-icon.png" alt="">Life Account</a>
+    <div class="links">
+      <a href="#features">Features</a>
+      <a href="#handoff">The hand-off</a>
+      <a href="#screens">iPhone &amp; iPad</a>
+      <a href="#privacy">Privacy</a>
+      <a href="index.html">Support</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <div>
+      <div class="appcard">
+        <img src="images/icon-512.png" alt="Life Account app icon">
+        <div><strong>Life Account</strong><span>For iPhone and iPad</span></div>
+      </div>
+      <div class="eyebrow">Estate · Benefits · Legacy</div>
+      <h1>Your affairs,<br><span class="accent">in one calm place.</span><br>When it matters.</h1>
+      <p class="lede">Get your family's documents, accounts, benefits and wishes in order, ten minutes at a time. If something ever happens to you, Life Account hands it all to them securely, as a gentle step-by-step plan.</p>
+      <div class="ctas">
+        <a class="btn btn-primary" href="#final"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.37 12.6c-.02-2.2 1.8-3.26 1.88-3.31-1.03-1.5-2.62-1.7-3.18-1.73-1.35-.14-2.64.8-3.33.8-.69 0-1.74-.78-2.87-.76-1.47.02-2.83.86-3.59 2.18-1.53 2.66-.39 6.6 1.1 8.75.73 1.05 1.6 2.24 2.73 2.2 1.1-.05 1.51-.71 2.84-.71 1.32 0 1.7.71 2.86.69 1.18-.02 1.93-1.07 2.65-2.13.83-1.22 1.18-2.4 1.2-2.46-.03-.01-2.3-.88-2.3-3.52zM14.2 6.13c.6-.73 1.01-1.75.9-2.76-.87.04-1.92.58-2.54 1.31-.56.65-1.05 1.68-.92 2.67.97.08 1.96-.49 2.56-1.22z"/></svg>Coming soon to the App Store</a>
+        <a class="btn btn-ghost" href="#features">See what it does</a>
+      </div>
+      <div class="chips"><span>Works offline</span><span>No account</span><span>No tracking</span><span>iPhone · iPad</span></div>
+    </div>
+    <div class="phones" aria-hidden="true">
+      <div class="phone p1"><img src="images/04-detail.jpg" alt=""></div>
+      <div class="phone p2"><img src="images/03-dashboard.jpg" alt=""></div>
+      <div class="phone p3"><img src="images/06-recovery.jpg" alt=""></div>
+    </div>
+  </div>
+</header>
+
+<section class="block" id="features">
+  <div class="wrap">
+    <div class="head">
+      <div class="eyebrow">Features</div>
+      <h2>You don't know what you don't know. Life Account does.</h2>
+      <p>No empty folders. Just the things your family would actually need, explained in plain English, in the order that matters.</p>
+    </div>
+    <div class="grid">
+      <div class="card"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg></div>
+        <h3>A plan built for your family</h3><p>A short Life Interview (marriage, children, service, home, crypto, pets) turns on exactly the items that apply to your household.</p></div>
+      <div class="card"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2zM22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
+        <h3>Guidance for every item</h3><p>Why it matters, how your family would claim it, and the common pitfalls, like why a will doesn't override an outdated beneficiary form.</p></div>
+      <div class="card"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+        <h3>A readiness score that's honest</h3><p>See how prepared your family is at a glance, with one suggested next task each week. Items you haven't reviewed in a year fade back to "needs review".</p></div>
+      <div class="card"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0zM12 9v4M12 17h.01"/></svg></div>
+        <h3>Critical gaps, flagged</h3><p>No guardian named for minor children? Nobody knows your phone passcode? The things that would hurt most are called out first.</p></div>
+      <div class="card"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.4 9.3 8 11 4.6-1.7 8-6 8-11V5z"/><path d="m9 12 2 2 4-4"/></svg></div>
+        <h3>Military &amp; VA, built in</h3><p>DD-214, SGLI, the Survivor Benefit Plan, DIC, burial benefits and DEERS, with the steps survivors need to take.</p></div>
+      <div class="card"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+        <h3>Encrypted on your device</h3><p>Everything is sealed with AES-256-GCM before it's saved, with the key in the Keychain. No account, no servers.</p></div>
+      <div class="card"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3H5a2 2 0 0 0-2 2v2M17 3h2a2 2 0 0 1 2 2v2M7 21H5a2 2 0 0 1-2-2v-2M17 21h2a2 2 0 0 0 2-2v-2M9 9h.01M15 9h.01M9.5 15a3.5 3.5 0 0 0 5 0"/></svg></div>
+        <h3>Face ID, twice when it counts</h3><p>Unlock with Face ID or your passcode, and confirm again before passcodes, seed phrases or recovery details are shown.</p></div>
+      <div class="card"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="7.5" cy="15.5" r="4.5"/><path d="m10.7 12.3 9.3-9.3M17 6l3 3M14 9l2 2"/></svg></div>
+        <h3>Family Key Cards <span class="badge">NEW</span></h3><p>Your vault key, split three ways. Any two cards open it; one alone reveals nothing. A checksum catches typos on the printed code.</p></div>
+      <div class="card"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg></div>
+        <h3>A recovery drill <span class="badge">NEW</span></h3><p>Prove your family can get in before they ever need to. The drill rebuilds the key from the cards and confirms it matches.</p></div>
+      <div class="card"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8z"/></svg></div>
+        <h3>Survivor Mode</h3><p>Your family doesn't see folders. They see a calm plan, one step at a time, with one-tap calls and nothing they have to do today.</p></div>
+      <div class="card"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="m4 6 8 6 8-6"/></svg></div>
+        <h3>Letters that matter</h3><p>Write to your spouse and children, including letters marked to open at a milestone, like an 18th birthday.</p></div>
+      <div class="card"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
+        <h3>A tamper-evident log</h3><p>Every unlock, change and recovery is recorded in a chain that breaks if anyone edits or deletes an entry.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="block alt" id="handoff">
+  <div class="wrap split">
+    <div>
+      <div class="eyebrow">The hand-off</div>
+      <h2>Two halves of one key.</h2>
+      <p class="lead">Apple's Legacy Contact passes your iCloud files to your family, but not your saved passwords or Keychain. So on its own, it can't open an encrypted vault. Life Account closes that gap.</p>
+      <div class="keys">
+        <div class="key"><span class="tag">KEY A</span><b>Legacy Package</b><span>Rides along in iCloud Drive, released by Apple to your Legacy Contact.</span></div>
+        <div class="key"><span class="tag">KEY B</span><b>Family Key Card</b><span>A printed card for your spouse or primary beneficiary.</span></div>
+        <div class="key"><span class="tag">KEY C</span><b>Attorney</b><span>For when Apple isn't involved at all.</span></div>
+      </div>
+      <ul class="points">
+        <li><strong>Any two cards open the vault.</strong> Apple's release plus your spouse's card, or your spouse plus your attorney.</li>
+        <li><strong>One card alone reveals nothing,</strong> not even to someone who breaks into your iCloud account.</li>
+        <li><strong>Lose a card? Re-split.</strong> New cards are issued and the old ones stop working.</li>
+      </ul>
+      <p class="note">Think of it like a safe-deposit box that needs two keys. Your family holds one, and Apple or your attorney holds the other.</p>
+    </div>
+    <div class="visual"><div class="phone"><img src="images/05-legacy.jpg" alt="Legacy hand-off screen showing a passed recovery drill and Family Key Cards"></div></div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap split rev">
+    <div>
+      <div class="eyebrow">For the people you leave behind</div>
+      <h2>A gentle plan, not a pile of paperwork.</h2>
+      <p class="lead">Grief is hard enough. When your family opens your vault, Life Account shows them only what to do next, and tells them it's fine to wait.</p>
+      <ul class="points">
+        <li><strong>The first days.</strong> The funeral home, death certificates, the phone passcode, and the joint account to use right now.</li>
+        <li><strong>Securing income and benefits.</strong> Life insurance, employer benefits, Social Security and VA claims, with the numbers to call.</li>
+        <li><strong>Settling accounts and the estate.</strong> The will, the mortgage, credit cards and subscriptions. There's no rush.</li>
+        <li><strong>Your letters.</strong> Waiting for them whenever they're ready.</li>
+      </ul>
+      <p class="note">Every step has "Later" and "Not needed". No percentages, no red, and support for grief always one tap away.</p>
+    </div>
+    <div class="visual"><div class="phone"><img src="images/06-recovery.jpg" alt="Survivor Mode home: We're so sorry. Daniel prepared this for you."></div></div>
+  </div>
+</section>
+
+<section class="block alt">
+  <div class="wrap">
+    <div class="head">
+      <div class="eyebrow">How it works</div>
+      <h2>From "I should really do this" to done.</h2>
+    </div>
+    <div class="steps">
+      <div class="step"><h3>Answer the Life Interview</h3><p>Ten quick questions about your household. About two minutes, and your plan is tailored to you.</p></div>
+      <div class="step"><h3>Ten minutes a week</h3><p>Work through one suggested item at a time. Your readiness score climbs, and reminders keep it current.</p></div>
+      <div class="step"><h3>Hand off, then test it</h3><p>Set your Legacy Contact, print your Family Key Cards, and run the recovery drill once a year.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="screens">
+  <div class="wrap">
+    <div class="head">
+      <div class="eyebrow">iPhone</div>
+      <h2>Designed to be finished, not just started.</h2>
+    </div>
+  </div>
+  <div class="gallery">
+    <figure><div class="phone"><img src="images/01-fresh.jpg" alt="Welcome screen" loading="lazy"></div><figcaption>A calm place to start</figcaption></figure>
+    <figure><div class="phone"><img src="images/02-interview.jpg" alt="Life Interview question" loading="lazy"></div><figcaption>The Life Interview</figcaption></figure>
+    <figure><div class="phone"><img src="images/03-dashboard.jpg" alt="Readiness dashboard" loading="lazy"></div><figcaption>Your readiness score</figcaption></figure>
+    <figure><div class="phone"><img src="images/04-detail.jpg" alt="Playbook item with guidance" loading="lazy"></div><figcaption>Guidance for every item</figcaption></figure>
+    <figure><div class="phone"><img src="images/05-legacy.jpg" alt="Legacy hand-off and recovery drill" loading="lazy"></div><figcaption>The hand-off, tested</figcaption></figure>
+    <figure><div class="phone"><img src="images/06-recovery.jpg" alt="Survivor Mode" loading="lazy"></div><figcaption>What your family sees</figcaption></figure>
+  </div>
+  <div class="wrap">
+    <div class="ipad">
+      <div class="tablet"><img src="images/ipad-dashboard.jpg" alt="Life Account on iPad" loading="lazy"></div>
+      <div>
+        <div class="eyebrow">iPad</div>
+        <h2 style="margin:12px 0 14px">Room to sit down and get it done.</h2>
+        <p style="color:var(--muted);font-size:18px">The same vault on the bigger screen, for the evening you finally sit down with the paperwork.</p>
+      </div>
+    </div>
+    <dl class="specs">
+      <div><dt>Devices</dt><dd>iPhone and iPad</dd></div>
+      <div><dt>Requires</dt><dd>iOS / iPadOS 17 or later</dd></div>
+      <div><dt>Connection</dt><dd>None needed, fully offline</dd></div>
+      <div><dt>Encryption</dt><dd>AES-256-GCM, on device</dd></div>
+    </dl>
+  </div>
+</section>
+
+<section class="block alt" id="privacy">
+  <div class="wrap privacy">
+    <div>
+      <div class="eyebrow">Privacy</div>
+      <h2 style="margin:12px 0 16px">Your family's information stays with your family.</h2>
+      <p style="color:var(--muted);font-size:18px;margin-bottom:22px">Life Account has no servers, no sign-in and no analytics. We never see your vault. It's stored encrypted on your device, and leaves it only through the Legacy Package you choose to create.</p>
+      <a class="textlink" href="privacy.html">Read the privacy policy →</a>
+    </div>
+    <ul class="points">
+      <li><strong>Encrypted on device.</strong> AES-256-GCM, with the key in the Keychain behind Face ID or your passcode.</li>
+      <li><strong>Zero-knowledge hand-off.</strong> The Legacy Package can't be opened with fewer than two Family Key Cards.</li>
+      <li><strong>No tracking.</strong> No ads, no analytics, no third-party SDKs that phone home.</li>
+      <li><strong>You're in control.</strong> Delete the vault and its key from the device at any time.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="final" id="final">
+  <div class="wrap">
+    <img src="images/icon-512.png" alt="">
+    <h2>Give your family the gift of knowing.</h2>
+    <p>Built so the people you love never have to guess. Coming soon to the App Store for iPhone and iPad.</p>
+    <div class="ctas">
+      <span class="btn btn-primary"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.37 12.6c-.02-2.2 1.8-3.26 1.88-3.31-1.03-1.5-2.62-1.7-3.18-1.73-1.35-.14-2.64.8-3.33.8-.69 0-1.74-.78-2.87-.76-1.47.02-2.83.86-3.59 2.18-1.53 2.66-.39 6.6 1.1 8.75.73 1.05 1.6 2.24 2.73 2.2 1.1-.05 1.51-.71 2.84-.71 1.32 0 1.7.71 2.86.69 1.18-.02 1.93-1.07 2.65-2.13.83-1.22 1.18-2.4 1.2-2.46-.03-.01-2.3-.88-2.3-3.52zM14.2 6.13c.6-.73 1.01-1.75.9-2.76-.87.04-1.92.58-2.54 1.31-.56.65-1.05 1.68-.92 2.67.97.08 1.96-.49 2.56-1.22z"/></svg>Coming soon to the App Store</span>
+      <a class="btn btn-ghost" href="index.html">Get support</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>© 2026 Daniel Vetan<p class="disclaimer">Life Account helps you organize information. It does not provide legal, financial, tax or medical advice. Apple, iCloud and Face ID are trademarks of Apple Inc.</p></div>
+    <div><a href="index.html">Support</a><a href="privacy.html">Privacy</a><a href="mailto:danielvetan@gmail.com">Contact</a></div>
+  </div>
+</footer>
+</body>
+</html>

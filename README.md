@@ -3,6 +3,7 @@
 Public pages for the Life Account iOS app, served by GitHub Pages:
 
 - Support: https://danielvetan.github.io/life-account-site/
+- Marketing: https://danielvetan.github.io/life-account-site/marketing.html
 - Privacy Policy: https://danielvetan.github.io/life-account-site/privacy.html
 
 Contact: danielvetan@gmail.com

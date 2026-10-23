@@ -10,41 +10,76 @@
 <main>
   <a class="brand" href="index.html"><span class="mark">✓</span> Life Account</a>
   <h1>Privacy Policy</h1>
-  <p class="muted">Effective October 21, 2026 · applies to Life Account for iOS, version 1.0</p>
+  <p class="muted">Effective October 22, 2026 · applies to Life Account for iOS (version 1.0 and later) and Life Account Pro</p>
 
   <div class="callout">
-    <strong>The short version:</strong> Life Account does not collect, transmit, sell or share any of your data.
-    Everything you enter stays on your device, encrypted. We can't see it, and neither can anyone else
-    unless you give them your Family Key Cards.
+    <strong>The short version:</strong> your vault stays on your iPhone, encrypted. A few optional features send data
+    to our server, and in every case what's sent is either encrypted so we can't read it, or the minimum that feature needs.
+    We don't sell or share your data, and Life Account has no advertising, analytics or tracking.
   </div>
 
-  <h2>What the app stores, and where</h2>
+  <h2>What stays on your iPhone</h2>
   <ul>
-    <li><strong>Your vault</strong> (checklist progress, account and policy details, contacts, notes and letters) is encrypted on your device with AES-256-GCM before it is saved, and stored only in the app's private storage on that device.</li>
-    <li><strong>The vault key</strong> is stored in your device's Keychain, protected by Face ID or your device passcode.</li>
-    <li><strong>The Legacy Package</strong>, if you create one, is written to storage you control (On My iPhone, or your own iCloud Drive). It is encrypted and cannot be opened without two of your three Family Key Cards.</li>
+    <li><strong>Your vault</strong> (documents, page images, people, notes and letters) is encrypted on your iPhone with AES-256-GCM before it is saved, in the app's private storage.</li>
+    <li><strong>The vault key</strong> is kept in your iPhone's Keychain, protected by Face ID or your passcode.</li>
+    <li><strong>Scanning:</strong> text on a scanned page is read on your iPhone. Pages are never uploaded to be read.</li>
+    <li><strong>Reminders</strong> are scheduled on your iPhone. Nothing about them is sent to us.</li>
+    <li><strong>The Legacy Package</strong>, if you make one, is saved where you choose (On My iPhone or your own iCloud Drive). It is encrypted and can't be opened without two of your three Family Key Cards.</li>
   </ul>
 
-  <h2>What we collect</h2>
-  <p>Nothing. The app has no accounts, makes no network requests, and contains no analytics, advertising, tracking or crash-reporting software. We have no servers that receive your information.</p>
+  <h2>Optional features that use a server</h2>
 
-  <h2>Sharing</h2>
-  <p>We don't share data because we never receive it. You decide who receives your Family Key Cards and Legacy Package. Anyone holding two cards and the package can open your vault, so keep the cards somewhere safe.</p>
+  <h3>Family sharing (iCloud)</h3>
+  <p>Sharing the vault with your family uses your own iCloud account (Apple's CloudKit). The app encrypts documents and keys before they leave your iPhone, so Apple and we can't read them. Apple's privacy policy covers iCloud.</p>
 
-  <h2>Apple services</h2>
-  <p>If you store the Legacy Package in iCloud Drive or use Apple's Legacy Contact feature, Apple's privacy policy governs those services. Apple's Legacy Contact does not release Keychain passwords, which is why Life Account uses Family Key Cards.</p>
+  <h3>Expiring links</h3>
+  <p>When you share documents with a link, the app encrypts them on your iPhone and uploads only the encrypted data, its size and its expiry date to our server. The key is the part of the link after the "#", which browsers never send to servers, so we can't open what you share. A link is deleted when it expires (1 to 30 days, your choice) or when you delete it in the app.</p>
+
+  <h3>Life Pass (Apple Wallet)</h3>
+  <p>To add a pass to Apple Wallet, the app sends our signing service a list of file names and fingerprints (hashes). The contents of the pass never leave your iPhone, and nothing is stored.</p>
+
+  <h3>Your accountant</h3>
+  <p>If you connect to a firm that uses Life Account Pro, our server stores:</p>
+  <ul>
+    <li>a random connection ID, your iPhone's public key for this connection, and a hashed copy of the secret token your iPhone uses to prove it's you;</li>
+    <li>your name, encrypted so that only that firm can read it;</li>
+    <li>the folders you send, the firm's requests and the completed return, encrypted end to end between your iPhone and the firm's browser;</li>
+    <li>for each tax year, the status the firm sets and how many documents you sent;</li>
+    <li>a log of when folders were sent, opened or withdrawn.</li>
+  </ul>
+  <p>We can't read the encrypted parts. Once the firm opens what you sent, its own privacy policy and professional duties apply to its copy. Folders are deleted when they expire (7 to 30 days) or when you withdraw them. Everything else is deleted when you tap <em>Disconnect</em>, when you delete your vault, or after three years with no activity.</p>
+
+  <h3>Keeping the service safe</h3>
+  <ul>
+    <li><strong>App Attest:</strong> we use Apple's App Attest to check that requests come from the genuine app. We don't keep the result.</li>
+    <li><strong>Server logs:</strong> our hosting provider, Vercel, Inc., processes IP addresses and browser details to deliver requests and protect the service. The logs we can see are kept for no more than 30 days, and we don't use them to identify anyone.</li>
+  </ul>
+
+  <h2>Life Account Pro (for accountants)</h2>
+  <p>For a firm's account we store the firm's name, the public keys of its passkeys, its firm code, and (if the passkey supports it) the firm's key encrypted so only that passkey can unlock it. Firms sign in with passkeys; we never handle passwords. The portal uses only the cookies needed to sign in and stay signed in, and no tracking cookies.</p>
+
+  <h2>Sharing and selling</h2>
+  <p>We don't sell or share personal information, and we don't use it for advertising. The only companies that process data for us are Vercel (hosting and storage) and Apple (iCloud, App Attest, Apple Wallet). If we were required by law to hand over data, all we could provide is the encrypted data and the details listed above.</p>
+
+  <h2>Where data is processed</h2>
+  <p>Our server and storage are run by Vercel, Inc., a U.S. company, so data you choose to send may be processed in the United States.</p>
 
   <h2>Deleting your data</h2>
-  <p>Use <em>Settings → Delete vault from this device</em> in the app, or delete the app. This removes the encrypted vault and its key from the device. Copies you exported, and Legacy Packages saved to other locations, must be deleted from those locations.</p>
+  <ul>
+    <li><strong>Everything on your iPhone:</strong> <em>Settings → Delete vault from this device</em>, or delete the app. If you're online, this also deletes your accountant connection from our server.</li>
+    <li><strong>A shared link:</strong> delete it in the app, or let it expire.</li>
+    <li><strong>Your accountant connection:</strong> <em>Vault → Taxes → Your accountant → Disconnect</em>. This deletes the connection and everything sent through it from our server. Copies your accountant already downloaded stay with them.</li>
+  </ul>
+  <p>Because we don't know who you are, we can't look up your data by name or email. If you've lost your iPhone and want an accountant connection deleted sooner than three years, email us and we'll work with you and the firm to remove it.</p>
 
   <h2>Children</h2>
-  <p>Life Account is intended for adults planning for their families. It does not knowingly collect information from children, and it collects no information from anyone.</p>
+  <p>Life Account is meant for adults planning for their families. You can keep your children's documents in your vault, where they stay encrypted on your devices. We don't knowingly collect information from children.</p>
 
   <h2>Not professional advice</h2>
   <p>Life Account helps you organize information. It does not provide legal, financial, tax or medical advice.</p>
 
   <h2>Changes</h2>
-  <p>If a future version ever adds a feature that sends data off your device (for example an optional emergency-access service), this policy will be updated before that version is released, and the feature will be opt-in.</p>
+  <p>We'll update this policy before any version of the app sends new kinds of data off your iPhone, and we'll change the effective date above. New features that use a server will always be optional.</p>
 
   <h2>Contact</h2>
   <p>Questions about privacy: <a href="mailto:danielvetan@gmail.com">danielvetan@gmail.com</a></p>

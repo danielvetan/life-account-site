@@ -58,8 +58,13 @@
   <h2>Life Account Pro (for accountants)</h2>
   <p>For a firm's account we store the firm's name, the public keys of its passkeys, its firm code, and (if the passkey supports it) the firm's key encrypted so only that passkey can unlock it. Firms sign in with passkeys; we never handle passwords. The portal uses only the cookies needed to sign in and stay signed in, and no tracking cookies.</p>
 
+  <h3>Verifying firms</h3>
+  <p>Clients can only connect to firms Life Account has verified. For that we store what the firm tells us (its credential type, state, license number, the name as licensed, business name, city, phone and website), the result of the identity check, and our reviewer's notes. We compare these details with public records, such as the IRS's lists of tax preparers and state license lookups.</p>
+  <p>The firm's owner verifies their identity with Stripe Identity (Stripe, Inc.) by showing a government ID and taking a selfie. Stripe handles the images under its own privacy policy. We receive only the result and the name on the ID, and we ask Stripe to delete the images and data 30 days after our review. We never store ID images, dates of birth, Social Security numbers, PTINs or EFINs.</p>
+  <p>Clients see the verification, for example "Verified CPA · Florida license AC12345", and the licensed person's name. A firm can delete its account at any time in the portal, which also deletes its verification and every client connection.</p>
+
   <h2>Sharing and selling</h2>
-  <p>We don't sell or share personal information, and we don't use it for advertising. The only companies that process data for us are Vercel (hosting and storage) and Apple (iCloud, App Attest, Apple Wallet). If we were required by law to hand over data, all we could provide is the encrypted data and the details listed above.</p>
+  <p>We don't sell or share personal information, and we don't use it for advertising. The only companies that process data for us are Vercel (hosting and storage), Apple (iCloud, App Attest, Apple Wallet) and Stripe (identity checks for accountants' firms). If we were required by law to hand over data, all we could provide is the encrypted data and the details listed above.</p>
 
   <h2>Where data is processed</h2>
   <p>Our server and storage are run by Vercel, Inc., a U.S. company, so data you choose to send may be processed in the United States.</p>
